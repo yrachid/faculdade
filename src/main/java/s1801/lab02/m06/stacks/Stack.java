@@ -3,81 +3,62 @@ package s1801.lab02.m06.stacks;
 import s1801.lab02.m06.exceptions.OverflowException;
 import s1801.lab02.m06.exceptions.UnderflowException;
 
-public class Stack {
-	private Object s[];
+public class Stack<T> {
+    private T[] items;
 
-	private int top = -1;
+    private int top = -1;
 
-	public Stack(int size) {
-		s = new Object[size];
-	}
+    public Stack(int size) {
+        items = (T[]) new Object[size];
+    }
 
-	public boolean isEmpty() {
-		if (top == -1)
-			return true;
-		return false;
-	}
+    private Stack(T[] items, int top) {
+        this.items = items;
+        this.top = top;
+    }
 
-	public boolean isFull() {
-		if (top == s.length - 1)
-			return true;
-		return false;
-	}
+    public int size() {
+        return items.length;
+    }
 
-	public void push(Object obj) throws OverflowException {
-		if (!isFull()) {
-			s[++top] = obj;
-		} else
-			throw new OverflowException();
-	}
+    public boolean isEmpty() {
+        return top == -1;
+    }
 
-	public Object pop() throws UnderflowException {
-		if (!isEmpty()) {
-			Object o = s[top];
-			s[top] = null;
-			top--;
-			return o;
-		} else
-			throw new UnderflowException();
+    public boolean isFull() {
+        return top == items.length - 1;
+    }
 
-	}
+    public void push(T obj) throws OverflowException {
+        if (isFull()) {
+            throw new OverflowException();
+        }
 
-	public static void main(String args[]) {
-		Stack s = new Stack(5);
-		try {
-			s.pop();
-		} catch (UnderflowException e) {
-			System.out.println(e.toString());
-		}
-		try {
-			s.push("1");
-			s.push("2");
-			s.push("3");
-			s.push("4");
-			s.push("5");
-		} catch (OverflowException e) {
-			System.out.println(e.toString());
-		}
-		try {
-			s.pop();
-			s.pop();
-		} catch (UnderflowException e) {
-			System.out.println(e.toString());
-		}
-		try {
-			s.push("6");
-		} catch (OverflowException e) {
-			System.out.println(e.toString());
-		}
-		try {
-			s.pop();
-			s.pop();
-			s.pop();
-			s.pop();
-			s.pop();
-		} catch (UnderflowException e) {
-			System.out.println(e.toString());
-		}
-	}
+        items[++top] = obj;
+    }
 
+    public T pop() throws UnderflowException {
+        if (isEmpty()) {
+            throw new UnderflowException();
+        }
+
+        Object o = items[top];
+        items[top] = null;
+        top--;
+        return (T) o;
+    }
+
+    public Stack<T> reverse() {
+        T[] reversedItems = (T[]) new Object[items.length];
+
+        for (int progression = 0; progression < items.length; progression++) {
+            reversedItems[progression] = items[regressiveIndexFor(progression)];
+        }
+
+        return new Stack<>(reversedItems, top);
+    }
+
+    private int regressiveIndexFor(int progressiveIndex) {
+        return items.length - (progressiveIndex + 1);
+    }
 }

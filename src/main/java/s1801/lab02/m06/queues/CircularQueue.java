@@ -1,10 +1,9 @@
 package s1801.lab02.m06.queues;
 
-import s1801.lab02.m06.SelfPrintable;
 import s1801.lab02.m06.exceptions.OverflowException;
 import s1801.lab02.m06.exceptions.UnderflowException;
 
-public class CircularQueue<T> implements Queueable<T>, SelfPrintable {
+public class CircularQueue<T> implements Queue<T> {
     private Object[] fila;
 
     private int i = -1, f = -1;

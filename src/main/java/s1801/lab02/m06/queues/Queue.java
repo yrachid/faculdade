@@ -3,7 +3,7 @@ package s1801.lab02.m06.queues;
 import s1801.lab02.m06.exceptions.OverflowException;
 import s1801.lab02.m06.exceptions.UnderflowException;
 
-public interface Queueable<T> {
+public interface Queue<T> {
 
     boolean isEmpty();
     boolean isFull();

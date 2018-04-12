@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import s1801.lab02.m06.exceptions.OverflowException;
 import s1801.lab02.m06.exceptions.UnderflowException;
+import s1801.lab02.m06.stacks.Stack;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,7 +16,7 @@ public class PersonalQueueTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private Queueable<Integer> queue;
+    private Queue<Integer> queue;
 
     @Before
     public void setUp() {
@@ -76,7 +77,9 @@ public class PersonalQueueTest {
     }
 
     @Test
-    public void it_allows_enqueueing_again_after_being_full_at_least_once() throws UnderflowException, OverflowException {
+    public void it_overflows_when_enqueued_after_being_full() throws UnderflowException, OverflowException {
+        expectedException.expect(OverflowException.class);
+
         queue.enqueue(1);
         queue.enqueue(2);
 
@@ -84,9 +87,19 @@ public class PersonalQueueTest {
         queue.dequeue();
 
         queue.enqueue(3);
-        queue.enqueue(4);
+    }
 
-        assertThat(queue.dequeue(), is(3));
-        assertThat(queue.dequeue(), is(4));
+    @Test
+    public void it_creates_a_queue_from_a_stack_having_items_correctly_sorted() throws OverflowException, UnderflowException {
+        Stack<Integer> stack = new Stack<>(3);
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        Queue<Integer> queueFromStack = PersonalQueue.fromStack(stack);
+
+        assertThat(queueFromStack.dequeue(), is(1));
+        assertThat(queueFromStack.dequeue(), is(2));
+        assertThat(queueFromStack.dequeue(), is(3));
     }
 }

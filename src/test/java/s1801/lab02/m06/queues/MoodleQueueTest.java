@@ -15,7 +15,7 @@ public class MoodleQueueTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private Queueable<Integer> queue;
+    private Queue<Integer> queue;
 
     @Before
     public void setUp() {
@@ -76,7 +76,9 @@ public class MoodleQueueTest {
     }
 
     @Test
-    public void it_allows_enqueueing_again_after_being_full_at_least_once() throws UnderflowException, OverflowException {
+    public void it_overflows_when_enqueued_after_being_full() throws UnderflowException, OverflowException {
+        expectedException.expect(OverflowException.class);
+
         queue.enqueue(1);
         queue.enqueue(2);
 

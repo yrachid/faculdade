@@ -3,9 +3,9 @@ package s1801.lab02.m06.queues;
 import s1801.lab02.m06.exceptions.OverflowException;
 import s1801.lab02.m06.exceptions.UnderflowException;
 
-public class MoodleDeque extends MoodleQueue {
+public class MoodleDeck extends MoodleQueue implements Deck {
 
-    public MoodleDeque(int size) {
+    public MoodleDeck(int size) {
         super(size);
     }
 
@@ -13,28 +13,24 @@ public class MoodleDeque extends MoodleQueue {
         if (isFull()) {
             throw new OverflowException();
         }
-
     }
 
     public void insertAtBack(Object o) throws OverflowException {
-        //?????????
     }
 
     public Object removeFromFront() throws UnderflowException {
-        //???????????
         return null;
     }
 
     public Object removeFromBack() throws UnderflowException {
         if (isEmpty())
             throw new UnderflowException();
-        else
-            return null;
-        //???????????
+
+        return null;
     }
 
     public static void main(String args[]) {
-        MoodleDeque d = new MoodleDeque(5);
+        MoodleDeck d = new MoodleDeck(5);
         try {
             d.insertAtBack("1");
             d.insertAtBack("2");
