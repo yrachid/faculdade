@@ -1,4 +1,4 @@
-
+package s1801.lab02.m08;
 
 // class to represent one node in a list
 class Node {
