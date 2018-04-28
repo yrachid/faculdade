@@ -69,6 +69,13 @@ public class ListTest {
             assertThat(list.getFirst().getData(), is(2));
             assertThat(list.getLast().getData(), is(1));
         }
+
+        @Test
+        public void following_insertion_sets_the_next_node_of_the_first_node() {
+            list.insertAtFront(2);
+
+            assertThat(list.getFirst().getNext().getData(), is(1));
+        }
     }
 
     public static class WhenInsertingAtBack extends SetUp {
@@ -100,14 +107,28 @@ public class ListTest {
         }
     }
 
-    @Ignore
     public static class WhenInsertingAtFrontAndThenAtBack extends SetUp {
 
         @Override
         void configure() {
             list.insertAtFront(1);
             list.insertAtBack(2);
+        }
 
+        @Test
+        public void first_element_is_the_one_inserted_at_front() {
+            assertThat(list.getFirst().getData(), is(1));
+        }
+
+        @Test
+        public void last_element_is_the_one_inserted_at_back() {
+            assertThat(list.getLast().getData(), is(2));
+        }
+
+        @Test
+        public void next_element_after_first_node_is_set_correctly() {
+            assertThat(list.getLast().getData(), is(2));
         }
     }
+
 }
