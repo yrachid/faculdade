@@ -1,15 +1,9 @@
 package s1801.lab02.m08;
 
 import j8spec.junit.J8SpecRunner;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static j8spec.J8Spec.beforeEach;
-import static j8spec.J8Spec.describe;
-import static j8spec.J8Spec.it;
+import static j8spec.J8Spec.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -65,41 +59,66 @@ public class ListTest {
                 assertThat(list.getFirst().getData(), is(2));
                 assertThat(list.getLast().getData(), is(1));
             });
+
+            it("Chains nodes correctly on subsequent frontal insertions", () -> {
+                list.insertAtFront(2);
+
+                assertThat(list.getFirst().getNext().getData(), is(1));
+            });
+        });
+
+        describe("When removing from front", () -> {
+            beforeEach(() -> {
+                list = new List();
+                list.insertAtFront(1);
+            });
+
+            it("Removes the only element when a list has a single element", () -> {
+                Object element = list.removeFromFront();
+
+                assertThat(element, is(1));
+                assertThat(list.isEmpty(), is(true));
+            });
+
+            it("pulls subsequent elements to the beginning of the list", () -> {
+                list.insertAtFront(2);
+
+                Object element = list.removeFromFront();
+
+                assertThat(element, is(2));
+                assertThat(list.getFirst().getData(), is(1));
+                assertThat(list.getFirst().getNext(), is(nullValue()));
+                assertThat(list.getLast().getData(), is(1));
+            });
+        });
+
+        describe("When removing from back", () -> {
+            beforeEach(() -> {
+                list = new List();
+                list.insertAtFront(1);
+            });
+
+            it("Removes the only element when a list has a single element", () -> {
+
+                Object element = list.removeFromBack();
+
+                assertThat(element, is(1));
+                assertThat(list.isEmpty(), is(true));
+            });
+
+            it("Removes the last element and correctly preserves the remaining ones", () -> {
+                list.insertAtFront(2);
+
+                Object element = list.removeFromBack();
+
+                assertThat(element, is(1));
+                assertThat(list.getFirst().getData(), is(2));
+                assertThat(list.getFirst().getNext(), is(nullValue()));
+                assertThat(list.getLast().getData(), is(2));
+            });
         });
     }
 
-
-//            @Test
-//            public void following_insertion_sets_the_next_node_of_the_first_node() {
-//                list.insertAtFront(2);
-//
-//                assertThat(list.getFirst().getNext().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void removeFromFront_removes_first_element() {
-//                list.insertAtFront(2);
-//
-//                Object element = list.removeFromFront();
-//
-//                assertThat(element, is(2));
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getFirst().getNext(), is(nullValue()));
-//                assertThat(list.getLast().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void removeFromBack_removes_last_element() {
-//                list.insertAtFront(2);
-//
-//                Object element = list.removeFromBack();
-//
-//                assertThat(element, is(1));
-//                assertThat(list.getFirst().getData(), is(2));
-//                assertThat(list.getFirst().getNext(), is(nullValue()));
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//
 //            @Test
 //            public void preserves_correct_linking_order_after_removing_from_back() {
 //                list.insertAtFront(2);
