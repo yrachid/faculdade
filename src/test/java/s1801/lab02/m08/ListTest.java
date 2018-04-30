@@ -167,6 +167,23 @@ public class ListTest {
                 assertThat(list.getLast().getData(), is(3));
             });
         });
+
+        describe("When swapping third and fourth elements", () -> {
+            beforeEach(() -> {
+                list = new List();
+                list.insertAtFront(1);
+                list.insertAtBack(2);
+                list.insertAtBack(3);
+                list.insertAtBack(4);
+                list.insertAtBack(5);
+            });
+
+            it("Does not swap elements of an empty list", () -> {
+                List anEmptyList = new List();
+
+                assertThat(anEmptyList.troca_ter_quarto(), is(false));
+            });
+        });
     }
 
 //            @Test

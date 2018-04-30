@@ -79,6 +79,7 @@ public class List {
     }
 
     public boolean troca_ter_quarto() {
+
         if (isEmpty()) {
             return false;
         }
