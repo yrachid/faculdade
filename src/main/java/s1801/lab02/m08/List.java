@@ -1,131 +1,132 @@
 package s1801.lab02.m08;
 
 public class List {
-   private Node firstNode;
-   private Node lastNode;
-   private String name;
+    private Node firstNode;
+    private Node lastNode;
+    private String name;
 
-   public List() {
-      this( "list" ); 
-   }  
-
-   public List( String listName ) {
-      name = listName;
-      firstNode = lastNode = null;
-   }
-   
-  public Node getFirst(){
-       return firstNode;
+    public List() {
+        this("list");
     }
-   
-   public Node getLast(){
-	   return lastNode;
-   }
 
-   public  void insertAtFront( Object insertItem ) {
-      if ( isEmpty() )
-         firstNode = lastNode = new Node( insertItem );
+    public List(String listName) {
+        name = listName;
+        firstNode = lastNode = null;
+    }
 
-      else
-         firstNode = new Node( insertItem, firstNode );
-   }
+    public Node getFirst() {
+        return firstNode;
+    }
 
-   public  void insertAtBack( Object insertItem ) {
-      if ( isEmpty() )
-         firstNode = lastNode = new Node( insertItem );
+    public Node getLast() {
+        return lastNode;
+    }
 
-      else {
-         lastNode.setNext (new Node( insertItem ));
-         lastNode = lastNode.getNext();
-      }
-   }
+    public void insertAtFront(Object insertItem) {
+        if (isEmpty())
+            firstNode = lastNode = new Node(insertItem);
 
-   public  Object removeFromFront() throws EmptyListException {
-      if ( isEmpty() )
-         throw new EmptyListException( name );
+        else
+            firstNode = new Node(insertItem, firstNode);
+    }
 
-      Object removedItem = firstNode.getData();
+    public void insertAtBack(Object insertItem) {
+        if (isEmpty())
+            firstNode = lastNode = new Node(insertItem);
 
-      if ( firstNode == lastNode )
-         firstNode = lastNode = null;
-      else
-         firstNode = firstNode.getNext();
+        else {
+            lastNode.setNext(new Node(insertItem));
+            lastNode = lastNode.getNext();
+        }
+    }
 
-      return removedItem;
+    public Object removeFromFront() throws EmptyListException {
+        if (isEmpty())
+            throw new EmptyListException(name);
 
-   }
+        Object removedItem = firstNode.getData();
 
-   public  Object removeFromBack() throws EmptyListException {
-      if ( isEmpty() )
-         throw new EmptyListException( name );
+        if (firstNode == lastNode)
+            firstNode = lastNode = null;
+        else
+            firstNode = firstNode.getNext();
 
-      Object removedItem = lastNode.getData();
+        return removedItem;
 
-      if ( firstNode == lastNode )
-         firstNode = lastNode = null;
+    }
 
-      else {
-         Node current = firstNode;
+    public Object removeFromBack() throws EmptyListException {
+        if (isEmpty())
+            throw new EmptyListException(name);
 
-         while ( current.getNext() != lastNode )
-            current = current.getNext();
-   
-         lastNode = current;
-         current.setNext(null);
-      }
+        Object removedItem = lastNode.getData();
 
-      return removedItem;
+        if (firstNode == lastNode)
+            firstNode = lastNode = null;
 
-   }
+        else {
+            Node current = firstNode;
+
+            while (current.getNext() != lastNode)
+                current = current.getNext();
+
+            lastNode = current;
+            current.setNext(null);
+        }
+
+        return removedItem;
+
+    }
 
     public boolean troca_ter_quarto() {
-       if (isEmpty()) {
-           return false;
-       }
+        if (isEmpty()) {
+            return false;
+        }
 
-       return true;
+        return true;
     }
 
     public boolean remove_impar() {
-       if (isEmpty()) {
-           return false;
-       }
+        if (isEmpty()) {
+            return false;
+        }
 
-       if (firstNode.getNext() == null) {
-           return false;
-       }
+        Node firstOddNode = firstNode.getNext();
 
-       Node firstOddNode = firstNode.getNext();
+        if (firstOddNode == null) {
+            return false;
+        }
 
-       if (firstOddNode.getNext() == null) {
-           return false;
-       }
+        if (firstOddNode == lastNode) {
+            lastNode = firstNode;
+            return true;
+        }
 
-       firstNode.setNext(firstOddNode.getNext());
+        firstNode.setNext(firstOddNode.getNext());
 
-       return true;
+        return true;
     }
 
     public boolean isEmpty() {
-      return firstNode == null;
-   }
+        return firstNode == null;
+    }
 
-   public  void print() {
-      if ( isEmpty() ) {
-         System.out.println( "Empty " + name );
-         return;
-      }
+    public void print() {
+        if (isEmpty()) {
+            System.out.println("Empty " + name);
+            return;
+        }
 
-      System.out.print( "The " + name + " is: " );
-      Node current = firstNode;
+        System.out.print("The " + name + " is: ");
+        Node current = firstNode;
 
-      while ( current != null ) {
-         System.out.print( current.getData().toString() + " " );
-         current = current.getNext();
-      }
+        while (current != null) {
+            System.out.print(current.getData().toString() + " ");
+            current = current.getNext();
+        }
 
-      System.out.println( "\n" );
-   }
-   
-  
+        System.out.println("\n");
+    }
+
+
 }
