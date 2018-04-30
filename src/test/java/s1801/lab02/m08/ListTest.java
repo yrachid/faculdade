@@ -117,6 +117,56 @@ public class ListTest {
                 assertThat(list.getLast().getData(), is(2));
             });
         });
+
+        describe("When removing the first odd index", () -> {
+            beforeEach(() -> {
+                list = new List();
+                list.insertAtFront(1);
+                list.insertAtBack(2);
+                list.insertAtBack(3);
+            });
+
+            it("Removes the first odd index when it is present", () -> {
+                assertThat(list.remove_impar(), is(true));
+                assertThat(list.getFirst().getData(), is(1));
+                assertThat(list.getLast().getData(), is(3));
+            });
+
+            it("Does not remove the element when list is empty", () -> {
+                List emptyList = new List();
+
+                assertThat(emptyList.remove_impar(), is(false));
+            });
+
+            it("Does not remove the element when list has a single element", () -> {
+                List listWithSingleElement = new List();
+                listWithSingleElement.insertAtFront(1);
+
+                assertThat(listWithSingleElement.remove_impar(), is(false));
+            });
+
+            it("Removes last element when the list has only two elements", () -> {
+                List listWithTwoElements = new List();
+                listWithTwoElements.insertAtFront(1);
+                listWithTwoElements.insertAtBack(2);
+
+                assertThat(listWithTwoElements.remove_impar(), is(true));
+                assertThat(listWithTwoElements.getFirst().getData(), is(1));
+                assertThat(listWithTwoElements.getLast().getData(), is(1));
+            });
+
+            it("Preserves correct node linking after removing the odd element", () -> {
+                List list = new List();
+                list.insertAtFront(1);
+                list.insertAtBack(2);
+
+                list.remove_impar();
+                list.insertAtBack(3);
+
+                assertThat(list.getFirst().getData(), is(1));
+                assertThat(list.getLast().getData(), is(3));
+            });
+        });
     }
 
 //            @Test
@@ -296,59 +346,4 @@ public class ListTest {
 //            }
 //        }
 //
-//        public static class WhenRemovingTheFirstOddIndex extends SetUp {
-//
-//            @Override
-//            void configure() {
-//                list.insertAtFront(1);
-//                list.insertAtBack(2);
-//                list.insertAtBack(3);
-//            }
-//
-//            @Test
-//            public void removes_the_first_odd_element_when_it_is_present() {
-//                assertThat(list.remove_impar(), is(true));
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getLast().getData(), is(3));
-//            }
-//
-//            @Test
-//            public void does_not_remove_element_at_odd_index_when_list_is_empty() {
-//                List list = new List();
-//
-//                assertThat(list.remove_impar(), is(false));
-//            }
-//
-//            @Test
-//            public void does_not_remove_element_at_odd_index_when_list_has_a_single_element() {
-//                List list = new List();
-//                list.insertAtFront(1);
-//
-//                assertThat(list.remove_impar(), is(false));
-//            }
-//
-//            @Test
-//            public void removes_last_element_when_list_has_only_two_elements() {
-//                List list = new List();
-//                list.insertAtFront(1);
-//                list.insertAtBack(2);
-//
-//                assertThat(list.remove_impar(), is(true));
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getLast().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void keeps_working_after_removing_odd_index() {
-//                List list = new List();
-//                list.insertAtFront(1);
-//                list.insertAtBack(2);
-//
-//                list.remove_impar();
-//                list.insertAtBack(3);
-//
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getLast().getData(), is(3));
-//            }
-//        }
 }
