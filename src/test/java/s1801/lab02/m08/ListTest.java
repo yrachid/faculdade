@@ -183,184 +183,19 @@ public class ListTest {
 
                 assertThat(anEmptyList.troca_ter_quarto(), is(false));
             });
+
+            it("Does not swap when list is too small", () -> {
+                List aSmallList = new List();
+                aSmallList.insertAtFront(1);
+                aSmallList.insertAtBack(2);
+                aSmallList.insertAtBack(3);
+
+                assertThat(list.troca_ter_quarto(), is(false));
+            });
+
+            it("Swaps when list is big enough", () -> {
+                assertThat(list.troca_ter_quarto(), is(true));
+            });
         });
     }
-
-//            @Test
-//            public void preserves_correct_linking_order_after_removing_from_back() {
-//                list.insertAtFront(2);
-//                list.insertAtFront(3);
-//
-//                Object element = list.removeFromFront();
-//
-//                assertThat(element, is(3));
-//                assertThat(list.getFirst().getData(), is(2));
-//                assertThat(list.getFirst().getNext().getData(), is(1));
-//                assertThat(list.getLast().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void preserves_correct_linking_order_after_removing_from_front() {
-//                list.insertAtFront(2);
-//                list.insertAtFront(3);
-//
-//                Object element = list.removeFromBack();
-//
-//                assertThat(element, is(1));
-//                assertThat(list.getFirst().getData(), is(3));
-//                assertThat(list.getFirst().getNext().getData(), is(2));
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//        }
-//
-//        public static class WhenInsertingAtBack extends SetUp {
-//
-//            @Override
-//            void configure() {
-//                list.insertAtBack(1);
-//            }
-//
-//            @Test
-//            public void first_insertion_sets_both_first_and_last_as_same_node() {
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getLast().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void following_insertions_push_older_elements_to_the_head_of_the_list() {
-//                list.insertAtBack(2);
-//
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//
-//            @Test
-//            public void following_insertion_sets_the_next_node_of_the_first_node() {
-//                list.insertAtBack(2);
-//
-//                assertThat(list.getFirst().getNext().getData(), is(2));
-//            }
-//
-//            @Test
-//            public void removeFromFront_removes_first_element() {
-//                list.insertAtBack(2);
-//
-//                Object element = list.removeFromFront();
-//
-//                assertThat(element, is(1));
-//                assertThat(list.getFirst().getData(), is(2));
-//                assertThat(list.getFirst().getNext(), is(nullValue()));
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//
-//            @Test
-//            public void removeFromBack_removes_last_element() {
-//                list.insertAtBack(2);
-//
-//                Object element = list.removeFromBack();
-//
-//                assertThat(element, is(2));
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getFirst().getNext(), is(nullValue()));
-//                assertThat(list.getLast().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void preserves_correct_linking_order_after_removing_from_back() {
-//                list.insertAtBack(2);
-//                list.insertAtBack(3);
-//
-//                Object element = list.removeFromFront();
-//
-//                assertThat(element, is(1));
-//                assertThat(list.getFirst().getData(), is(2));
-//                assertThat(list.getFirst().getNext().getData(), is(3));
-//                assertThat(list.getLast().getData(), is(3));
-//            }
-//
-//            @Test
-//            public void preserves_correct_linking_order_after_removing_from_front() {
-//                list.insertAtBack(2);
-//                list.insertAtBack(3);
-//
-//                Object element = list.removeFromBack();
-//
-//                assertThat(element, is(3));
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getFirst().getNext().getData(), is(2));
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//
-//        }
-//
-//        public static class WhenInsertingAtFrontAndThenAtBack extends SetUp {
-//
-//            @Override
-//            void configure() {
-//                list.insertAtFront(1);
-//                list.insertAtBack(2);
-//            }
-//
-//            @Test
-//            public void first_element_is_the_one_inserted_at_front() {
-//                assertThat(list.getFirst().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void last_element_is_the_one_inserted_at_back() {
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//
-//            @Test
-//            public void next_element_after_first_node_is_set_correctly() {
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//
-//            @Test
-//            public void removeFromFront_removes_first_element() {
-//
-//                Object element = list.removeFromFront();
-//
-//                assertThat(element, is(1));
-//                assertThat(list.getFirst().getData(), is(2));
-//                assertThat(list.getFirst().getNext(), is(nullValue()));
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//
-//            @Test
-//            public void removeFromBack_removes_last_element() {
-//
-//                Object element = list.removeFromBack();
-//
-//                assertThat(element, is(2));
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getFirst().getNext(), is(nullValue()));
-//                assertThat(list.getLast().getData(), is(1));
-//            }
-//
-//            @Test
-//            public void preserves_correct_linking_order_after_removing_from_back() {
-//                list.insertAtBack(3);
-//
-//                Object element = list.removeFromFront();
-//
-//                assertThat(element, is(1));
-//                assertThat(list.getFirst().getData(), is(2));
-//                assertThat(list.getFirst().getNext().getData(), is(3));
-//                assertThat(list.getLast().getData(), is(3));
-//            }
-//
-//            @Test
-//            public void preserves_correct_linking_order_after_removing_from_front() {
-//                list.insertAtBack(3);
-//
-//                Object element = list.removeFromBack();
-//
-//                assertThat(element, is(3));
-//                assertThat(list.getFirst().getData(), is(1));
-//                assertThat(list.getFirst().getNext().getData(), is(2));
-//                assertThat(list.getLast().getData(), is(2));
-//            }
-//        }
-//
 }

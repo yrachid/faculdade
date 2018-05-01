@@ -84,7 +84,19 @@ public class List {
             return false;
         }
 
-        return true;
+        int currentPosition = 0;
+        Node currentNode = firstNode;
+
+        while (currentNode.getNext() != null) {
+            if (currentPosition == 2) {
+                return true;
+            }
+
+            currentPosition++;
+            currentNode = currentNode.getNext();
+        }
+
+        return false;
     }
 
     public boolean remove_impar() {
