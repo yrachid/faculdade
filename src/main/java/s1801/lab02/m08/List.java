@@ -79,24 +79,43 @@ public class List {
     }
 
     public boolean troca_ter_quarto() {
-
         if (isEmpty()) {
             return false;
         }
 
-        int currentPosition = 0;
-        Node currentNode = firstNode;
-
-        while (currentNode.getNext() != null) {
-            if (currentPosition == 2) {
-                return true;
-            }
-
-            currentPosition++;
-            currentNode = currentNode.getNext();
+        if (firstNode == lastNode) {
+            return false;
         }
 
-        return false;
+        Node secondNode = firstNode.getNext();
+
+        if (secondNode == lastNode) {
+            return false;
+        }
+
+        Node thirdNode = secondNode.getNext();
+
+        if (thirdNode == lastNode) {
+            return false;
+        }
+
+        Node fourthNode = thirdNode.getNext();
+
+        secondNode.setNext(fourthNode);
+
+        if (fourthNode == lastNode) {
+            lastNode = thirdNode;
+            fourthNode.setNext(lastNode);
+            return true;
+        }
+
+        Node fifthNode = fourthNode.getNext();
+
+        fourthNode.setNext(thirdNode);
+
+        thirdNode.setNext(fifthNode);
+
+        return true;
     }
 
     public boolean remove_impar() {

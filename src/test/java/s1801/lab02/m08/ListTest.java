@@ -175,7 +175,6 @@ public class ListTest {
                 list.insertAtBack(2);
                 list.insertAtBack(3);
                 list.insertAtBack(4);
-                list.insertAtBack(5);
             });
 
             it("Does not swap elements of an empty list", () -> {
@@ -190,11 +189,34 @@ public class ListTest {
                 aSmallList.insertAtBack(2);
                 aSmallList.insertAtBack(3);
 
-                assertThat(list.troca_ter_quarto(), is(false));
+                assertThat(aSmallList.troca_ter_quarto(), is(false));
             });
 
             it("Swaps when list is big enough", () -> {
-                assertThat(list.troca_ter_quarto(), is(true));
+                boolean didSwap = list.troca_ter_quarto();
+
+                assertThat(didSwap, is(true));
+                assertThat(list.removeFromFront(), is(1));
+                assertThat(list.removeFromFront(), is(2));
+                assertThat(list.removeFromFront(), is(4));
+                assertThat(list.removeFromFront(), is(3));
+            });
+
+            it("Preserves correct linking after swapping", () -> {
+                List bigList = new List();
+                bigList.insertAtBack(1);
+                bigList.insertAtBack(2);
+                bigList.insertAtBack(3);
+                bigList.insertAtBack(4);
+                bigList.insertAtBack(5);
+
+                bigList.troca_ter_quarto();
+
+                assertThat(bigList.removeFromFront(), is(1));
+                assertThat(bigList.removeFromFront(), is(2));
+                assertThat(bigList.removeFromFront(), is(4));
+                assertThat(bigList.removeFromFront(), is(3));
+                assertThat(bigList.removeFromFront(), is(5));
             });
         });
     }
