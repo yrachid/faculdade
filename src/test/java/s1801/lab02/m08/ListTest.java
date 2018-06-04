@@ -53,7 +53,7 @@ public class ListTest {
                 assertThat(list.getLast().getData(), is(1));
             });
 
-            it("pushes older elements to the end of the list on subsequent frontal insertions", () -> {
+            it("pushes older elements to the end bst the list on subsequent frontal insertions", () -> {
                 list.insertAtFront(2);
 
                 assertThat(list.getFirst().getData(), is(2));
@@ -80,7 +80,7 @@ public class ListTest {
                 assertThat(list.isEmpty(), is(true));
             });
 
-            it("pulls subsequent elements to the beginning of the list", () -> {
+            it("pulls subsequent elements to the beginning bst the list", () -> {
                 list.insertAtFront(2);
 
                 Object element = list.removeFromFront();
@@ -177,7 +177,7 @@ public class ListTest {
                 list.insertAtBack(4);
             });
 
-            it("Does not swap elements of an empty list", () -> {
+            it("Does not swap elements bst an empty list", () -> {
                 List anEmptyList = new List();
 
                 assertThat(anEmptyList.troca_ter_quarto(), is(false));

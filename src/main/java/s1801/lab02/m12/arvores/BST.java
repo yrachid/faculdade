@@ -96,7 +96,7 @@ public class BST {
 
     private int height(BSTNode p) {
         if (p == null) {
-            return -1;
+            return 0;
         }
 
         int leftHeight = height(p.left);

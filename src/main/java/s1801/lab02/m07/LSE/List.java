@@ -24,7 +24,7 @@ public class List {
 		   return lastNode;
 	   }
 
-	   // insert Object at front of List
+	   // insert Object at front bst List
 	   public  void insertAtFront( Object insertItem ) {
 	      if ( isEmpty() ) // firstNode and lastNode refer to same object
 	         firstNode = lastNode = new Node( insertItem );
@@ -33,7 +33,7 @@ public class List {
 	         firstNode = new Node( insertItem, firstNode );
 	   }
 
-	   // insert Object at end of List
+	   // insert Object at end bst List
 	   public  void insertAtBack( Object insertItem ) {
 	      if ( isEmpty() ) // firstNode and lastNode refer to same Object
 	         firstNode = lastNode = new Node( insertItem );
@@ -102,7 +102,7 @@ public class List {
 	      System.out.print( "The " + name + " is: " );
 	      Node current = firstNode;
 
-	      // while not at end of list, output current node's data
+	      // while not at end bst list, output current node's data
 	      while ( current != null ) {
 	         System.out.print( current.getData().toString() + " " );
 	         current = current.getNext();
@@ -119,12 +119,12 @@ public class List {
 			while (current!=null) { 
 				if (obj1.equals(current.getData())) { 
 					Node tmpNode = new Node( obj2 ); 
-					if ( current.getNext() != null ) { //se tiver um próximo elemento 
+					if ( current.getNext() != null ) { //se tiver um prï¿½ximo elemento 
 						tmpNode.setNext(current.getNext()); 
 				} else { //se for o ultimo elemento 
 					lastNode = tmpNode; 
 					tmpNode.setNext(null); 
-				}  //ou utilizar o método insertAtBack()
+				}  //ou utilizar o mï¿½todo insertAtBack()
 				current.setNext(tmpNode); 
 				retorno = true; 
 				break; 
@@ -142,7 +142,7 @@ public class List {
 			if (firstNode.getData().equals(o)){ //se for o primeiro 
 				removeFromFront(); 
 				return true; 
-			} else if (lastNode.getData().equals(o)){ //se for o último 
+			} else if (lastNode.getData().equals(o)){ //se for o ï¿½ltimo 
 				removeFromBack(); 
 				return true;
 			} 
@@ -153,7 +153,7 @@ public class List {
 				ant = tmp; 
 				tmp = tmp.getNext(); 
 			} 
-			if (tmp == null)//se não encontrou 
+			if (tmp == null)//se nï¿½o encontrou 
 				return false; 
 			else 
 				ant.setNext(tmp.getNext()); 

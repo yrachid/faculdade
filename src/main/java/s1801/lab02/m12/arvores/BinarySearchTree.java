@@ -1,6 +1,7 @@
 package s1801.lab02.m12.arvores;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static java.util.Optional.empty;
 
@@ -9,6 +10,16 @@ public class BinarySearchTree {
     private Node<Integer> root;
     private int leaves;
     private int nodes;
+
+    public BinarySearchTree(){}
+
+    private BinarySearchTree(Integer ... values) {
+        Stream.of(values).forEach(this::insert);
+    }
+
+    public static BinarySearchTree bst(Integer ... values) {
+        return new BinarySearchTree(values);
+    }
 
     public Node<Integer> root() {
         return root;
@@ -93,7 +104,7 @@ public class BinarySearchTree {
 
     private int height(Node<Integer> node) {
         if (node == null) {
-            return -1;
+            return 0;
         }
 
         int leftHeight = height(node.left);
@@ -134,6 +145,14 @@ public class BinarySearchTree {
 
     private boolean isEmpty() {
         return root == null;
+    }
+
+    public boolean isFull() {
+        int height = height();
+        int actualNodeCount = countNodes();
+        int expectedNodeCountForFullTree = (int) Math.pow(2, height) - 1;
+
+        return actualNodeCount == expectedNodeCountForFullTree;
     }
 
     public final class Node<T> {
