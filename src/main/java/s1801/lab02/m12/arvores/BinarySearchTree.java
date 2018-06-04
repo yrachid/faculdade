@@ -7,6 +7,8 @@ import static java.util.Optional.empty;
 public class BinarySearchTree {
 
     private Node<Integer> root;
+    private int leaves;
+    private int nodes;
 
     public Node<Integer> root() {
         return root;
@@ -46,6 +48,64 @@ public class BinarySearchTree {
         return true;
     }
 
+    public int countLeafNodes() {
+        leaves = 0;
+
+        return countLeafNodes(root);
+    }
+
+    private int countLeafNodes(Node<Integer> node) {
+        if (node != null) {
+            if (isLeaf(node)) {
+                leaves++;
+            }
+
+            countLeafNodes(node.left);
+            countLeafNodes(node.right);
+        }
+
+        return leaves;
+    }
+
+    private boolean isLeaf(Node<Integer> node) {
+        return node.left == null && node.right == null;
+    }
+
+    public int countNodes() {
+        nodes = 0;
+        return countNodes(root);
+    }
+
+    private int countNodes(Node<Integer> node) {
+        if (node != null) {
+            nodes++;
+
+            countNodes(node.left);
+            countNodes(node.right);
+        }
+
+        return nodes;
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node<Integer> node) {
+        if (node == null) {
+            return -1;
+        }
+
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+
+        if (leftHeight > rightHeight) {
+            return leftHeight + 1;
+        }
+
+        return rightHeight + 1;
+    }
+
     public Optional<Node<Integer>> search(Integer element) {
 
         if (isEmpty()) {
@@ -66,7 +126,7 @@ public class BinarySearchTree {
         }
 
         if (node.key < element) {
-           return search(node.right, element);
+            return search(node.right, element);
         }
 
         return search(node.left, element);
