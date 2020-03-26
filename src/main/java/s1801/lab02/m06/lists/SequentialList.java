@@ -9,13 +9,13 @@ public class SequentialList {
         list = new Object[size];
     }    
  
-    /* Retorna o elemento na posição especificada.  */
+    /* Retorna o elemento na posio especificada.  */
     public Object get (int index){
         if (index<0 || index>last) return null;
         else return list[index];
     }
     
-    /* Retorna true se o elemento foi inserido no final da lista, false caso contrário. */
+    /* Retorna true se o elemento foi inserido no final da lista, false caso contrrio. */
     public boolean add (Object o) {
         if (isFull()) return false;
         last++;
@@ -23,8 +23,8 @@ public class SequentialList {
         return true;
     }
     
-    /* Retorna true se o elemento foi inserido na lista, false caso contrário.
-     * Insere o elemento na posição especificada */
+    /* Retorna true se o elemento foi inserido na lista, false caso contrrio.
+     * Insere o elemento na posio especificada */
     public boolean add (Object o, int pos) {
     	if (isFull()) return false;
         for (int i=last+1; i>pos; i--) {
@@ -35,7 +35,7 @@ public class SequentialList {
         return true;
     }
     
-    /* Remove o elemento na posição especificada */ 
+    /* Remove o elemento na posiï¿½ï¿½o especificada */ 
     public Object remove (int index) {
     	if (isEmpty()) return null;
     	else if (index<0 || index>last) {
@@ -52,13 +52,13 @@ public class SequentialList {
         return o;
     }
  
-    /* Verifica se a lista está vazia: não tel elementos */
+    /* Verifica se a lista estï¿½ vazia: nï¿½o tel elementos */
     public boolean isEmpty (){
         if (last==-1) return true;
         else return false;
      }
      
-    /* Verifica se a lista está cheia: todas as posições da array interna ocupadas */
+    /* Verifica se a lista estï¿½ cheia: todas as posiï¿½ï¿½es da array interna ocupadas */
     public boolean isFull (){
         if (last==list.length-1) return true;
         else return false;

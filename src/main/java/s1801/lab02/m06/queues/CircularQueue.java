@@ -79,7 +79,7 @@ public class CircularQueue<T> implements Queue<T> {
 			}
 		}
 		
-		//Enquanto a fila não for vazia, esvazia-la mostrando os elementos
+		//Enquanto a fila nao for vazia, esvazia-la mostrando os elementos
 		//na ordem em que foram inseeidos
 		
 		while(!f.isEmpty()){
