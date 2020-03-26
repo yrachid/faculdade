@@ -19,10 +19,26 @@ public class BinaryMinHeap {
         return data[0];
     }
 
-    public void add(int value) {
+    public void insert(int value) {
+        if (heapSize == data.length) {
+            throw new HeapException("Internal data structure overflow");
+        }
+        heapSize++;
+        data[heapSize - 1] = value;
+        rotateParent(heapSize - 1);
     }
 
-    private void rotateWithParent(int nodeIndex) {
+    private void rotateParent(int nodeIndex) {
+        if (nodeIndex != 0) {
+            int parentIndex = getParentIndex(nodeIndex);
+            if (data[parentIndex] > data[nodeIndex]) {
+                int placeholder = data[nodeIndex];
+                data[nodeIndex] = data[parentIndex];
+                data[parentIndex] = placeholder;
+
+                rotateParent(parentIndex);
+            }
+        }
     }
 
     public boolean isEmpty() {
@@ -54,11 +70,31 @@ public class BinaryMinHeap {
 
     public static void main(String[] args) {
         BinaryMinHeap heap = new BinaryMinHeap(10);
-        heap.add(9);
-        heap.add(8);
-        heap.add(6);
-        heap.add(5);
-        heap.add(1);
-        heap.add(3);
+        heap.insert(1);
+        heap.insert(3);
+        heap.insert(6);
+        heap.insert(5);
+        heap.insert(9);
+        heap.insert(8);
+
+        System.out.println("Antes da insercao: ");
+        System.out.println(heap);
+
+        System.out.println();
+
+        System.out.println("Insert -1");
+        heap.insert(-1);
+        System.out.println("Apos a insercao: ");
+        System.out.println(heap);
+
+        try {
+            System.out.println("Teste de overflow:");
+            heap.insert(7);
+            heap.insert(7);
+            heap.insert(7);
+            heap.insert(7);
+        }catch (HeapException ex) {
+            ex.printStackTrace();
+        }
     }
 }
