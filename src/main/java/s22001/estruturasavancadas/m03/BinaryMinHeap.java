@@ -93,7 +93,7 @@ public class BinaryMinHeap {
             heap.insert(7);
             heap.insert(7);
             heap.insert(7);
-        }catch (HeapException ex) {
+        } catch (HeapException ex) {
             ex.printStackTrace();
         }
     }
